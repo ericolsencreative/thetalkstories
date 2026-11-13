@@ -96,3 +96,27 @@ textarea{resize:vertical}
 .stat p{margin:0;font-size:17px;color:#e9dfcf}
 .findings .note{margin:28px 0 0;font-size:18px;font-weight:700;max-width:760px}
 .findings .fine{margin:14px 0 0;font-size:14px;color:#c9b9a8;max-width:760px}
+fieldset.scale{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+fieldset.scale legend{font-size:15px;margin-bottom:8px;padding:0}
+.got-it legend{font-size:14px;letter-spacing:3px;font-weight:700;text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills label{position:relative}
+.pills input{position:absolute;opacity:0;width:1px;height:1px}
+.pills span{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:2px solid var(--ink);border-radius:22px;background:#fff;font-size:15px;cursor:pointer;text-align:center;line-height:1.15}
+.pills input:checked+span{background:var(--ink);color:var(--paper)}
+.pills input:focus-visible+span{outline:3px solid var(--red);outline-offset:2px}
+details.research{border:2px dashed var(--line);border-radius:6px;padding:0}
+details.research summary{cursor:pointer;padding:16px 18px;font-weight:700;list-style:none;display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+details.research summary::-webkit-details-marker{display:none}
+details.research summary::before{content:'+';font-size:20px;color:var(--red);margin-right:4px}
+details.research[open] summary::before{content:'\2013'}
+details.research summary .fine{font-weight:400}
+.research-body{padding:4px 18px 20px;display:flex;flex-direction:column;gap:22px}
+.row5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.row5 label{position:relative}
+.row5 input{position:absolute;opacity:0;width:1px;height:1px}
+.row5 span{display:flex;align-items:center;justify-content:center;min-height:44px;border:2px solid var(--ink);border-radius:6px;background:#fff;font-weight:700;cursor:pointer}
+.row5 input:checked+span{background:var(--ink);color:var(--paper)}
+.row5 input:focus-visible+span{outline:3px solid var(--red);outline-offset:2px}
+.ends{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:2px}
+.picks.two{grid-template-columns:repeat(2,minmax(0,1fr))}

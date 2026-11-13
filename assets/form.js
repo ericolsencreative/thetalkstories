@@ -14,3 +14,12 @@ document.querySelectorAll('form[data-endpoint]').forEach(function (form) {
       .catch(function () { status.textContent = 'Something went wrong. Please try again.'; btn.disabled = false; });
   });
 });
+
+document.querySelectorAll('input[name=got_talk]').forEach(function (r) {
+  r.addEventListener('change', function () {
+    var no = r.value === 'No' && r.checked;
+    var lab = document.getElementById('got-label'), ta = document.getElementById('got');
+    lab.textContent = no ? 'SO HOW DID YOU LEARN ABOUT SEX?' : 'TELL US ABOUT YOUR SEX TALK';
+    ta.placeholder = no ? 'Friends, school, the internet, a book left on the coffee table...' : 'Who gave it, where were you, and what did they say?';
+  });
+});
