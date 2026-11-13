@@ -190,3 +190,9 @@ details.research summary .fine{font-weight:400}
 .guide .faq-item h4{margin:0 0 8px;font-size:19px;color:var(--ink)}
 .guide .faq-item p{margin:0 0 12px}
 .guide h3[id^="when-to-have"],.guide h3[id^="what-to-say-when"],.guide h3[id^="talking-to-teens"],.guide h3[id^="talking-to-kids-about-porn"],.guide h3[id^="fears-and-myths"],.guide h3[id^="the-sex-talk-in-specific"],.guide h3[id^="after-the-talk"]{font-family:'Permanent Marker',cursive;font-weight:400;color:var(--red);font-size:24px;margin-top:44px}
+/* sticky header (desktop/tablet; on phones the wrapped header is too tall to pin) */
+@media (min-width:760px){
+.site-header{position:sticky;top:0;z-index:50;box-shadow:0 2px 12px rgba(43,29,22,.18)}
+.site-header .wrap{padding-top:14px;padding-bottom:14px}
+.guide h2,.guide h3,.guide h4,#share,#stories,#why{scroll-margin-top:104px}
+}
