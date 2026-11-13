@@ -160,3 +160,4 @@ details.research summary .fine{font-weight:400}
 .site-footer .social{margin-top:12px;font-weight:700}
 @media (max-width:600px){.badge{width:48px;height:48px;font-size:13px}.site-header .logo{font-size:32px}.form-card h2{margin:0 -20px;padding:26px 20px 4px}.form-card h2+p{margin:-18px -20px 8px;padding:8px 20px 22px}}
 @media (max-width:600px){.hero-card{transform:none}}
+.hero .hero-card a.watch{color:var(--red);display:inline-block;margin-top:14px;font-weight:700}
