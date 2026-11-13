@@ -120,3 +120,43 @@ details.research summary .fine{font-weight:400}
 .row5 input:focus-visible+span{outline:3px solid var(--red);outline-offset:2px}
 .ends{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:2px}
 .picks.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* ===== red stamp theme ===== */
+.site-header{background:var(--red);color:var(--paper)}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--paper)}
+.brand:hover{color:var(--paper)}
+.badge{width:60px;height:60px;flex:none;border-radius:50%;background:var(--paper);color:var(--red);display:flex;align-items:center;justify-content:center;text-align:center;font-size:16px;line-height:.9;transform:rotate(-6deg)}
+.site-header .logo{color:var(--paper);font-size:40px}
+.site-header .nav a{color:var(--paper)}
+.site-header .btn{background:var(--paper);color:var(--red)!important}
+.site-header .btn:hover{background:#fff}
+.hero{background:var(--red);color:var(--paper)}
+.hero .wrap{padding-top:48px;padding-bottom:96px}
+.hero a:not(.btn){color:var(--paper)}
+.hero .small{color:#f6dcd6}
+.hero .btn{background:var(--ink)}
+.hero-card{background:var(--paper);color:var(--ink);border-left:0;box-shadow:0 24px 50px rgba(43,29,22,.35);transform:rotate(2deg)}
+#stories h2,.section>.wrap>h1{color:var(--red)}
+.card{background:#fff;border-left:0;padding:0 0 22px}
+.card h3{background:var(--red);color:var(--paper);margin:0 0 18px;padding:16px 24px 13px;font-size:26px}
+.card>.label,.card .got,.card .wish,.card .watch{margin-left:24px;margin-right:24px}
+.label{font-weight:700}
+.findings{background:var(--red);color:var(--paper)}
+.findings .lede{color:#f6dcd6}
+.stat{border-top:2px solid var(--paper)}
+.stat .big{font-size:54px}
+.stat p{color:var(--paper)}
+.findings .fine{color:#f6dcd6}
+.form-card{background:#fff;padding-top:0}
+.form-card h2{background:var(--red);color:var(--paper);margin:0 -36px;padding:30px 36px 4px}
+.form-card h2+p{background:var(--red);color:var(--paper);margin:-18px -36px 8px;padding:8px 36px 26px}
+.pills span{border-color:var(--red);color:var(--red);font-weight:700}
+.pills input:checked+span{background:var(--red);color:var(--paper)}
+.form-card .btn{background:var(--red)}
+.form-card .btn:hover{background:#7d221c}
+.check input{accent-color:var(--red)}
+.site-footer{background:var(--ink);color:var(--paper);border-top:0}
+.site-footer a{color:var(--paper)}
+.site-footer .fineprint{margin-top:12px;color:#c9b9a8}
+.site-footer .social{margin-top:12px;font-weight:700}
+@media (max-width:600px){.badge{width:48px;height:48px;font-size:13px}.site-header .logo{font-size:32px}.form-card h2{margin:0 -20px;padding:26px 20px 4px}.form-card h2+p{margin:-18px -20px 8px;padding:8px 20px 22px}}
+@media (max-width:600px){.hero-card{transform:none}}
