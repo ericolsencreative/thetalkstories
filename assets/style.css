@@ -196,3 +196,5 @@ details.research summary .fine{font-weight:400}
 .site-header .wrap{padding-top:14px;padding-bottom:14px}
 .guide h2,.guide h3,.guide h4,#share,#stories,#why{scroll-margin-top:104px}
 }
+.guide-cta{margin-top:28px;background:var(--card);border-left:10px solid var(--ink);padding:16px 20px}
+.guide-cta p:last-child{margin:0}
