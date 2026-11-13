@@ -88,3 +88,11 @@ textarea{resize:vertical}
 .hero-card .hero-wish{margin:0;font-weight:700;font-size:19px}
 .hero-card figcaption{margin-top:20px;font-size:26px}
 @media (max-width:600px){.hero-card{transform:none}}
+.findings{background:var(--ink);color:var(--paper)}
+.findings .lede{color:#d9cdb8}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.stat{border-top:3px solid #e8a79c;padding-top:14px}
+.stat .big{margin:0 0 4px;font-family:'Permanent Marker',cursive;font-size:46px;line-height:1.05;color:#fbf7ef}
+.stat p{margin:0;font-size:17px;color:#e9dfcf}
+.findings .note{margin:28px 0 0;font-size:18px;font-weight:700;max-width:760px}
+.findings .fine{margin:14px 0 0;font-size:14px;color:#c9b9a8;max-width:760px}
