@@ -1,0 +1,25 @@
+name: Daily reel
+on:
+  schedule:
+    - cron: "47 0 * * *"   # 4:47 PM Pacific (PST); YouTube/TikTok go live at 5:00
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Post a specific queued reel now (optional)"
+        required: false
+permissions:
+  contents: write
+concurrency: daily-reel
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          git config user.name "thetalk-bot"
+          git config user.email "hello@thetalkstories.com"
+      - run: python3 scripts/post_reel.py
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          FORCE_SLUG: ${{ github.event.inputs.slug }}
