@@ -161,3 +161,28 @@ details.research summary .fine{font-weight:400}
 @media (max-width:600px){.badge{width:48px;height:48px;font-size:13px}.site-header .logo{font-size:32px}.form-card h2{margin:0 -20px;padding:26px 20px 4px}.form-card h2+p{margin:-18px -20px 8px;padding:8px 20px 22px}}
 @media (max-width:600px){.hero-card{transform:none}}
 .hero .hero-card a.watch{color:var(--red);display:inline-block;margin-top:14px;font-weight:700}
+/* long-form guide */
+.guide .g-wrap{max-width:760px;padding-top:24px;padding-bottom:72px}
+.guide h1{font-family:'Permanent Marker',cursive;font-weight:400;font-size:clamp(40px,6vw,60px);line-height:1.08;margin:8px 0 12px}
+.guide h2{font-family:'Permanent Marker',cursive;font-weight:400;font-size:clamp(28px,4vw,36px);line-height:1.15;margin:56px 0 14px;scroll-margin-top:16px}
+.guide h3{font-size:22px;margin:36px 0 10px;scroll-margin-top:16px}
+.guide h4{font-size:18px;margin:26px 0 6px;scroll-margin-top:16px}
+.guide p,.guide li{font-size:18px;line-height:1.65}
+.guide ul,.guide ol{padding-left:24px}
+.g-byline{color:var(--muted);font-size:15px!important;margin:0 0 14px}
+.g-note{background:var(--card);border:2px dashed var(--line);padding:14px 16px;font-size:15px!important}
+.g-toc{background:var(--card);border-left:10px solid var(--ink);padding:16px 20px;margin:24px 0}
+.g-toc ol{margin:6px 0 0;padding-left:22px}.g-toc li{font-size:16px!important;line-height:1.5}
+.guide .label{font-family:'Permanent Marker',cursive;font-size:13px!important;letter-spacing:.06em;color:var(--red);margin:0 0 6px}
+.g-story{margin:28px 0;background:var(--card);border-left:10px solid var(--red);padding:18px 20px;box-shadow:0 8px 20px rgba(43,29,22,.08)}
+.g-story blockquote{margin:0}.g-story blockquote p{margin:0;font-size:17px}
+.g-story figcaption{margin-top:10px;color:var(--muted);font-size:14px}
+.g-wish{margin:20px 0;padding:14px 18px;border-top:2px dashed var(--line);border-bottom:2px dashed var(--line)}
+.g-wish p:last-child{margin:0;font-weight:700}
+.g-script{margin:16px 0;background:#f3ece0;border-radius:6px;padding:14px 18px}
+.g-script p:last-child{margin:0}
+.g-table{overflow-x:auto;margin:20px 0}
+.guide table{border-collapse:collapse;width:100%;font-size:15px}
+.guide th,.guide td{border-bottom:1px solid var(--line);padding:10px 8px;text-align:left;vertical-align:top}
+.guide th{background:var(--ink);color:var(--paper)}
+.guide td:first-child{font-weight:700;white-space:nowrap}
