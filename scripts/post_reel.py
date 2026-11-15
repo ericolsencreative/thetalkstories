@@ -47,7 +47,7 @@ if not e.get("site"):
 url = f"https://thetalkstories.com/{slug}/{slug}.mp4"
 for i in range(40):  # up to ~20 min for GitHub Pages to deploy
     try:
-        r = urllib.request.urlopen(urllib.request.Request(url, method="HEAD"), timeout=30)
+        r = urllib.request.urlopen(urllib.request.Request(url, method="HEAD", headers={"User-Agent": "Mozilla/5.0 (thetalk-bot)"}), timeout=30)
         if r.status == 200: break
     except Exception: pass
     time.sleep(30)
