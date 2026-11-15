@@ -17,7 +17,8 @@ def git(*a): subprocess.run(["git", *a], check=True)
 def save(s):
     json.dump(s, open(SCHED, "w"), indent=1)
 def commit(msg):
-    git("add", "-A"); git("commit", "-m", msg); git("push")
+    git("add", "-A"); git("commit", "-m", msg)
+    git("pull", "--rebase", "--autostash"); git("push")
 def call(method, path, **params):
     params["access_token"] = TOKEN
     data = urllib.parse.urlencode(params).encode()
@@ -35,6 +36,16 @@ due = [e for e in sched if not e.get("done") and (e["slug"] == force or (not for
 if not due:
     print("Nothing due", today); sys.exit(0)
 e = due[0]; slug = e["slug"]; q = f"_queue/{slug}"
+# Scheduled runs start early (GitHub's timer runs late); hold until just before 5 PM Pacific.
+PT = zoneinfo.ZoneInfo("America/Los_Angeles")
+if not force:
+    now = datetime.datetime.now(PT)
+    go = now.replace(hour=16, minute=55, second=0, microsecond=0)
+    if e["date"] == today and now < go:
+        print(f"Waiting until {go:%H:%M} PT to publish {slug}"); time.sleep((go - now).total_seconds())
+    git("pull", "--rebase", "--autostash")
+    sched = json.load(open(SCHED)); e = next(x for x in sched if x["slug"] == slug)
+    if e.get("done"): print("Already done", slug); sys.exit(0)
 print("Publishing", slug)
 
 if not e.get("site"):
