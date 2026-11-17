@@ -42,7 +42,10 @@ if not force:
     now = datetime.datetime.now(PT)
     go = now.replace(hour=16, minute=55, second=0, microsecond=0)
     if e["date"] == today and now < go:
-        print(f"Waiting until {go:%H:%M} PT to publish {slug}"); time.sleep((go - now).total_seconds())
+        wait = (go - now).total_seconds()
+        if wait > 4.5 * 3600:  # too early (e.g. a late-firing overnight cron); a later run will post it
+            print(f"Too early ({wait/3600:.1f}h before {go:%H:%M} PT); leaving {slug} for a later run"); sys.exit(0)
+        print(f"Waiting until {go:%H:%M} PT to publish {slug}"); time.sleep(wait)
     git("pull", "--rebase", "--autostash")
     sched = json.load(open(SCHED)); e = next(x for x in sched if x["slug"] == slug)
     if e.get("done"): print("Already done", slug); sys.exit(0)
