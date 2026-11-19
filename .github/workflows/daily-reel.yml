@@ -43,3 +43,10 @@ jobs:
           echo "::add-mask::$NEW"
           GH_TOKEN=$GH_SECRETS_PAT gh secret set IG_TOKEN --repo "$GITHUB_REPOSITORY" --body "$NEW"
           echo "IG_TOKEN refreshed"
+      # Dead-man's switch: healthchecks.io emails Eric if a day passes with no finished run.
+      - name: Tell healthchecks.io the run finished
+        if: success()
+        env:
+          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+        run: |
+          if [ -n "$HEALTHCHECK_URL" ]; then curl -fsS -m 10 --retry 3 "$HEALTHCHECK_URL" > /dev/null || true; fi
