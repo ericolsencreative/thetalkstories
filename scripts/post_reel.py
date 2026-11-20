@@ -35,7 +35,7 @@ sched = json.load(open(SCHED))
 due = [e for e in sched if not e.get("done") and (e["slug"] == force or (not force and e["date"] <= today))]
 if not due:
     print("Nothing due", today); sys.exit(0)
-e = due[0]; slug = e["slug"]; q = f"_queue/{slug}"
+e = due[0]; slug = e["slug"]; due_date = e["date"]; q = f"_queue/{e.get('queue', slug)}"
 # Scheduled runs start early (GitHub's timer runs late); hold until just before 5 PM Pacific.
 PT = zoneinfo.ZoneInfo("America/Los_Angeles")
 if not force:
@@ -47,7 +47,7 @@ if not force:
             print(f"Too early ({wait/3600:.1f}h before {go:%H:%M} PT); leaving {slug} for a later run"); sys.exit(0)
         print(f"Waiting until {go:%H:%M} PT to publish {slug}"); time.sleep(wait)
     git("pull", "--rebase", "--autostash")
-    sched = json.load(open(SCHED)); e = next(x for x in sched if x["slug"] == slug)
+    sched = json.load(open(SCHED)); e = next(x for x in sched if x["slug"] == slug and x["date"] == due_date)
     if e.get("done"): print("Already done", slug); sys.exit(0)
 print("Publishing", slug)
 
