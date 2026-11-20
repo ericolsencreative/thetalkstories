@@ -54,8 +54,14 @@ print("Publishing", slug)
 if not e.get("site"):
     for src, dst in MAP.items():
         p = os.path.join(q, src)
-        if os.path.exists(p):
-            d = dst.format(slug=slug); os.makedirs(os.path.dirname(d) or ".", exist_ok=True); shutil.copy(p, d)
+        d = dst.format(slug=slug)
+        parts = sorted(x for x in os.listdir(q) if x.startswith(src + ".part")) if os.path.isdir(q) else []
+        if os.path.exists(p) or parts:
+            os.makedirs(os.path.dirname(d) or ".", exist_ok=True)
+            if os.path.exists(p): shutil.copy(p, d)
+            else:  # large videos are uploaded in <4 MB pieces (video.mp4.part1, .part2, ...); rejoin them
+                with open(d, "wb") as out:
+                    for x in parts: out.write(open(os.path.join(q, x), "rb").read())
     e["site"] = True; save(sched); commit(f"Publish {slug} page")
 
 url = f"https://thetalkstories.com/{slug}/{slug}.mp4"
