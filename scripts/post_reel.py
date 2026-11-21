@@ -18,7 +18,11 @@ def save(s):
     json.dump(s, open(SCHED, "w"), indent=1)
 def commit(msg):
     git("add", "-A"); git("commit", "-m", msg)
-    git("pull", "--rebase", "--autostash"); git("push")
+    for attempt in range(5):  # another commit can land between pull and push; retry instead of failing after posting
+        git("pull", "--rebase", "--autostash")
+        if subprocess.run(["git", "push"]).returncode == 0: return
+        time.sleep(5 * (attempt + 1))
+    git("push")
 def call(method, path, **params):
     params["access_token"] = TOKEN
     data = urllib.parse.urlencode(params).encode()
