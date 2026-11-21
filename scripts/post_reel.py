@@ -36,11 +36,11 @@ due = [e for e in sched if not e.get("done") and (e["slug"] == force or (not for
 if not due:
     print("Nothing due", today); sys.exit(0)
 e = due[0]; slug = e["slug"]; due_date = e["date"]; q = f"_queue/{e.get('queue', slug)}"
-# Scheduled runs start early (GitHub's timer runs late); hold until just before 5 PM Pacific.
+# Scheduled runs start early (GitHub's timer runs late); hold until just before 5 AM Pacific.
 PT = zoneinfo.ZoneInfo("America/Los_Angeles")
 if not force:
     now = datetime.datetime.now(PT)
-    go = now.replace(hour=16, minute=55, second=0, microsecond=0)
+    go = now.replace(hour=4, minute=55, second=0, microsecond=0)
     if e["date"] == today and now < go:
         wait = (go - now).total_seconds()
         if wait > 4.5 * 3600:  # too early (e.g. a late-firing overnight cron); a later run will post it
