@@ -47,7 +47,7 @@ if not force:
     go = now.replace(hour=4, minute=55, second=0, microsecond=0)
     if e["date"] == today and now < go:
         wait = (go - now).total_seconds()
-        if wait > 4.5 * 3600:  # too early (e.g. a late-firing overnight cron); a later run will post it
+        if wait > 5 * 3600:  # too early (e.g. a late-firing overnight cron); a later run will post it
             print(f"Too early ({wait/3600:.1f}h before {go:%H:%M} PT); leaving {slug} for a later run"); sys.exit(0)
         print(f"Waiting until {go:%H:%M} PT to publish {slug}"); time.sleep(wait)
     git("pull", "--rebase", "--autostash")
