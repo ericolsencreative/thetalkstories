@@ -1,10 +1,14 @@
 name: Daily reel
 on:
   schedule:
-    # GitHub's timer often runs hours late, so start early; the script holds the post until 4:55 AM Pacific.
-    - cron: "0 9 * * *"    # 1:00 AM PST
-    - cron: "0 11 * * *"   # 3:00 AM PST (backup)
-    - cron: "30 13 * * *"  # 5:30 AM PST (last-chance backup)
+    # GitHub drops or delays scheduled runs (worst at :00), so fire several times at odd minutes
+    # overnight; the first run waits until 4:55 AM Pacific, later ones see the post is done and exit.
+    - cron: "17 8 * * *"   # 12:17 AM PST
+    - cron: "43 9 * * *"   # 1:43 AM PST
+    - cron: "13 10 * * *"  # 2:13 AM PST
+    - cron: "37 11 * * *"  # 3:37 AM PST
+    - cron: "7 12 * * *"   # 4:07 AM PST
+    - cron: "29 12 * * *"  # 4:29 AM PST
   workflow_dispatch:
     inputs:
       slug:
