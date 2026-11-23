@@ -1,14 +1,10 @@
 name: Daily reel
 on:
   schedule:
-    # GitHub drops or delays scheduled runs (worst at :00), so fire several times at odd minutes
-    # overnight; the first run waits until 4:55 AM Pacific, later ones see the post is done and exit.
-    - cron: "17 8 * * *"   # 12:17 AM PST
-    - cron: "43 9 * * *"   # 1:43 AM PST
-    - cron: "13 10 * * *"  # 2:13 AM PST
-    - cron: "37 11 * * *"  # 3:37 AM PST
-    - cron: "7 12 * * *"   # 4:07 AM PST
-    - cron: "29 12 * * *"  # 4:29 AM PST
+    # The Cloudflare scheduler starts this job at 4:45 AM Pacific and the script posts at 4:55.
+    # GitHub's own timer runs hours late, so these are only safety nets for a day the scheduler misses.
+    - cron: "23 14 * * *"   # 6:23 AM PST (backup)
+    - cron: "11 16 * * *"   # 8:11 AM PST (last-chance backup)
   workflow_dispatch:
     inputs:
       slug:
@@ -26,7 +22,9 @@ jobs:
       - run: |
           git config user.name "thetalk-bot"
           git config user.email "hello@thetalkstories.com"
-      - run: python3 scripts/post_reel.py
+      - name: Post today's reel
+        shell: bash  # pipefail, so the step still fails when the script fails
+        run: python3 scripts/post_reel.py 2>&1 | tee "$RUNNER_TEMP/post.log"
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           FORCE_SLUG: ${{ github.event.inputs.slug }}
@@ -47,10 +45,12 @@ jobs:
           echo "::add-mask::$NEW"
           GH_TOKEN=$GH_SECRETS_PAT gh secret set IG_TOKEN --repo "$GITHUB_REPOSITORY" --body "$NEW"
           echo "IG_TOKEN refreshed"
-      # Dead-man's switch: healthchecks.io emails Eric if a day passes with no finished run.
-      - name: Tell healthchecks.io the run finished
+      # Dead-man's switch: healthchecks.io emails Eric if a day passes with no reel posted.
+      # Runs that post nothing (backups, "Nothing due") do not ping.
+      - name: Tell healthchecks.io a reel was posted
         if: success()
         env:
           HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
         run: |
+          if ! grep -qE "^(Posted|Already (posted|done)) " "$RUNNER_TEMP/post.log"; then echo "No reel posted this run; not pinging"; exit 0; fi
           if [ -n "$HEALTHCHECK_URL" ]; then curl -fsS -m 10 --retry 3 "$HEALTHCHECK_URL" > /dev/null || true; fi
